@@ -32,7 +32,7 @@
 <script>
   import {
     computed,
-    onMounted
+    onUpdated
   } from 'vue';
 
   import $ from 'jquery';
@@ -47,11 +47,19 @@
       const store = useStore();
       // store 의 state (데이터) 는 수시로 변경되므로 computed 로 감시한다.
       const mbmenu = computed( () => store.getters.getMbMenuData );
+      // store 의 action 호출
+      // store.dispatch('액션메소드') 
 
       // 화면에 html 의 구성이 완료되면
-      onMounted(() => {
+      onUpdated(() => {
         // 모바일 메뉴
         let mb_div = $('.mb-div');
+
+        // 모바일 닫기 버튼 기능
+        let mb_close = $('.mb-close');
+        mb_close.click(function(){
+          mb_div.hide();
+        });
 
         // 모바일 보기 버튼 기능
         let mb_bt = $('.mb-bt');
