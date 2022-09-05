@@ -8,6 +8,11 @@
           disableOnIteraction: false,
         }"
         v-bind:loop = "true"
+        :pagination = "{
+          el: '.sw-visual-pg',
+          clickable: 'true'
+        }"
+
         v-on:swiper="onSwiper"
         v-on:slideChange="onSlideChange"
         class="sw-visual"
@@ -23,6 +28,10 @@
           />
         </swiper-slide>
 
+        <!-- 슬라이드 콘트롤 -->
+        <div class="sw-visual-control">
+          <div class="sw-visual-pg"></div>
+        </div>
 
     </Swiper>
 
@@ -32,9 +41,10 @@
 <script>
 import { ref } from "vue";
 
-import { Autoplay } from 'swiper';
+import { Autoplay, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
+import 'swiper/css/pagination';
 
 import VisualList from '@/components/VisualList.vue';
 export default {
@@ -78,8 +88,8 @@ export default {
       }
     ];
 
-    const onSwiper = (swiper) => {
-      console.log(swiper)
+    const onSwiper = () => {
+      // console.log(swiper)
     };
     const onSlideChange = () => {
       // console.log('slide change');
@@ -87,7 +97,7 @@ export default {
     return  {
       onSwiper,
       onSlideChange,
-      modules: [Autoplay],
+      modules: [Autoplay, Pagination],
       slideData
     }
   }
